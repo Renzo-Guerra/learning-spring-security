@@ -1,0 +1,27 @@
+services:
+  app-springboot:
+    build: .
+    container_name: app-users-container
+    ports:
+      - "8080:8080"
+    environment:
+      JWT_SECRET_KEY: aAreY5BWKUfofUGLeDq4WnpChXljqah92TmwZqltveE # Lo ideal seria usar un file .env
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/db_testing
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 5XKKavxXJlWMsProIZLVU26xsJgBwqtuGfP0YVkQ7qN
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:17-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 5XKKavxXJlWMsProIZLVU26xsJgBwqtuGfP0YVkQ7qN
+      POSTGRES_DB: db_testing
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
