@@ -6,9 +6,12 @@ import org.learning.springsecurity.DTO.AuthenticationDTOReq;
 import org.learning.springsecurity.DTO.RegisterDTOReq;
 import org.learning.springsecurity.DTO.UserDTORes;
 import org.learning.springsecurity.config.JwtService;
+import org.learning.springsecurity.entity.Role;
 import org.learning.springsecurity.entity.User;
 import org.learning.springsecurity.enums.RoleEnum;
 import org.learning.springsecurity.exception.InvalidCredentialsException;
+import org.learning.springsecurity.exception.NotFoundException;
+import org.learning.springsecurity.repository.RoleRepository;
 import org.learning.springsecurity.repository.UserRepository;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,9 +28,13 @@ public class AuthServiceImp implements AuthService{
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    private final RoleRepository roleRepository;
 
     @Override
     public UserDTORes register(RegisterDTOReq request, RoleEnum roleEnum) {
+        Role role = roleRepository.findByName(roleEnum)
+                            .orElseThrow(() -> new NotFoundException("Unable to find the role!"));
+
 
         User newUser = User.builder()
                 .name(request.getName())
@@ -35,7 +42,7 @@ public class AuthServiceImp implements AuthService{
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .createdAt(LocalDate.now())
-                .roleEnum(roleEnum)
+                .role(role)
                 .build();
         newUser.setUpdatedAt(newUser.getCreatedAt());
         User savedUser = userRepository.save(newUser);

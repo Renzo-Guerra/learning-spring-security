@@ -4,14 +4,12 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.learning.springsecurity.enums.RoleEnum;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -45,12 +43,13 @@ public class User implements UserDetails {
     @Column(name = "updatedAt")
     private LocalDate updatedAt;
     @NonNull
-    @Enumerated(EnumType.ORDINAL)
-    private RoleEnum roleEnum;
+    @ManyToOne
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(this.getRoleEnum().name()));
+        return List.of(new SimpleGrantedAuthority(this.getRole().getName().toString()));
     }
 
     @Override

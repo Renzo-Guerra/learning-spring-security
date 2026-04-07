@@ -73,7 +73,8 @@ public class SecurityConfig {
         PathPatternRequestMatcher.Builder builder = PathPatternRequestMatcher.withDefaults();
 
         return new OrRequestMatcher(List.of(
-                builder.matcher(HttpMethod.POST, "/api/auth/register/admin")
+                builder.matcher(HttpMethod.POST, "/api/auth/register/admin"),
+                builder.matcher(HttpMethod.GET, "/api/users/full")
         ));
     }
 }

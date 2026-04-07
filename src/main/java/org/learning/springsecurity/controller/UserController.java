@@ -2,6 +2,7 @@ package org.learning.springsecurity.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.learning.springsecurity.DTO.UserDTORes;
+import org.learning.springsecurity.entity.User;
 import org.learning.springsecurity.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,5 +25,10 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserDTORes>> findAllUsers(){
         return ResponseEntity.ok(userService.findAllUsers());
+    }
+
+    @GetMapping("/full")
+    public ResponseEntity<List<User>> findAllUsersFull(){
+        return ResponseEntity.ok(userService.findAllUsersFull());
     }
 }

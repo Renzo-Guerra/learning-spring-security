@@ -99,4 +99,65 @@ POST: /api/auth/register/admin
   "password": "anightattheopera"
 }
 ```
+
+Find all users detailed information (everything). 
+I just wanted to make sure that role was being assigned correctly.
+
+GET: /api/users/full
+```JSON
+[
+  {
+      "id": 5,
+      "name": "Matías",
+      "surname": "López",
+      "email": "matias.lopez@gmail.com",
+      "password": "$2a$10$osD2/fU2BLOquPm7RcgxeeV.vUfs5wRm7TJPtcBieM4bP3HDRmk6u",
+      "createdAt": "2026-04-07",
+      "updatedAt": "2026-04-07",
+      "role": {
+        "id": 1,
+        "name": "USER",
+        "description": "Default user role",
+        "createdAt": "2026-04-07",
+        "updatedAt": "2026-04-07"
+      },
+      "accountNonExpired": true,
+      "accountNonLocked": true,
+      "authorities": [
+        {
+          "authority": "USER"
+        }
+      ],
+      "credentialsNonExpired": true,
+      "enabled": true,
+      "username": "matias.lopez@gmail.com"
+    },
+  {
+    "id": 6,
+    "name": "Valentina",
+    "surname": "Rodríguez",
+    "email": "valentina.rodriguez@gmail.com",
+    "password": "$2a$10$/Gv1JjH56gjO4rB5iBzje.7k5rrvlFDPqnV8HuTp69X/fFbUNA/4W",
+    "createdAt": "2026-04-07",
+    "updatedAt": "2026-04-07",
+    "role": {
+      "id": 1,
+      "name": "USER",
+      "description": "Default user role",
+      "createdAt": "2026-04-07",
+      "updatedAt": "2026-04-07"
+    },
+    "accountNonExpired": true,
+    "accountNonLocked": true,
+    "authorities": [
+      {
+        "authority": "USER"
+      }
+    ],
+    "credentialsNonExpired": true,
+    "enabled": true,
+    "username": "valentina.rodriguez@gmail.com"
+  }
+]
+```
 ---

@@ -3,6 +3,7 @@ package org.learning.springsecurity.service;
 import lombok.RequiredArgsConstructor;
 import org.learning.springsecurity.DTO.UserDTORes;
 import org.learning.springsecurity.entity.User;
+import org.learning.springsecurity.exception.NotFoundException;
 import org.learning.springsecurity.mapper.UserMapper;
 import org.learning.springsecurity.repository.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -21,7 +22,7 @@ public class UserServiceImp implements UserService{
 
         User currentUser = (User) authentication.getPrincipal();
 
-        if(currentUser == null) throw new RuntimeException("Unable to retrieve current user information");
+        if(currentUser == null) throw new NotFoundException("Unable to retrieve current user information");
 
         return currentUser;
     }
@@ -40,6 +41,11 @@ public class UserServiceImp implements UserService{
         return users.stream()
                 .map(UserMapper::userToUserDTORes)
                 .toList();
+    }
+
+    @Override
+    public List<User> findAllUsersFull() {
+        return userRepository.findAll();
     }
 
 }

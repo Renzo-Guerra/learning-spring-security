@@ -7,7 +7,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.learning.springsecurity.enums.RoleEnum;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -32,6 +31,5 @@ public class Role {
     @UpdateTimestamp
     @Column(name = "updatedAt")
     private LocalDate updatedAt;
-
 
 }
