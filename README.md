@@ -7,7 +7,12 @@ has a role assigned, depending on which one you have you will be able to access 
 endpoints.
 
 Inside of _/bootstrap/UserSeeder.java_  there are preloaded users that you can modify. 
-For instance only 1 SUPER_ADMIN user was created
+For instance only 1 SUPER_ADMIN user was created.
+
+IMPORTANT: There is already a .json file with a postman collection, 
+in case you don't want to create the endpoints manually.
+
+It's in root/spring-security.postman_collection.json
 
 ## How to lunch it
 Clone the repo, while having docker open run "docker-compose up" command 
